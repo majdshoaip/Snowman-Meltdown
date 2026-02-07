@@ -1,19 +1,70 @@
 import random
 
+
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
-def get_random_word():
 
+STAGES = [
+    # Stage 0:
+    """
+     ___  
+    /___\\ 
+    (o o) 
+    ( : ) 
+    ( : ) 
+    """,
+    # Stage 1:
+    """
+     ___  
+    /___\\ 
+    (o o) 
+    ( : ) 
+    """,
+    # Stage 2:
+    """
+     ___  
+    /___\\ 
+    (o o) 
+    """,
+    # Stage 3:
+    """
+     ___  
+    /___\\ 
+    """
+]
+
+
+def get_random_word():
     return WORDS[random.randint(0, len(WORDS) - 1)]
+
+
+
+def display_game_state(mistakes, secret_word, guessed_letters):
+    print(STAGES[mistakes])
+
+    display_word = ""
+    for letter in secret_word:
+        if letter in guessed_letters:
+            display_word += letter + " "
+        else:
+            display_word += "_ "
+    print("Word: ", display_word)
+    print("\n")
+
 
 def play_game():
     secret_word = get_random_word()
-    print("Welcome to Snowman Meltdown!")
-    print("Secret word selected: " + secret_word)
+    guessed_letters = []
+    mistakes = 0
 
+    print("Welcome to Snowman Meltdown!")
+
+
+    display_game_state(mistakes, secret_word, guessed_letters)
 
     guess = input("Guess a letter: ").lower()
     print("You guessed:", guess)
+
 
 if __name__ == "__main__":
     play_game()
